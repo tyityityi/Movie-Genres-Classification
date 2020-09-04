@@ -1,0 +1,93 @@
+
+==========
+Overview
+==========
+
+This project implements a set of classifiers including Random Forest, Logistic Regression and Multilayer Perceptron to predict movie genre. The classifiers are trained with various combination of features. 
+
+
+
+The features and class labels are derived from the following published datasets.
+
+Deldjoo,  Yashar  and  Constantin,  Mihai  Gabriel  and  Schedl,  Markus  and  Ionescu,  Bogdan 
+andCremonesi, Paolo. MMTF-14K: A Multifaceted Movie Trailer Feature Dataset for Recommendation and Retrieval. Proceedings of the 9th ACM Multimedia Systems Conference, MMSys 2018,Amsterdam, The Netherlands, June 12-15, 2018F. 
+
+Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM Transactions on Interactive Intelligent Systems (TiiS) 5, 4, Article 19 (December 2015)
+
+The dataset consists of movie genres, metadata, audio and visual features for 5774 movies. The movies are split into the following datasets:
+
+* Training set: 5240 movies.
+* Validation set: 299 movies.
+* Test set: 235 movies.
+
+Mainly used features in this project contains the followings:
+
+* movieID: unique identifier for each movie (to be used for mapping movies to their labels)
+* movieTitle: title of the movie. Type: text.
+* Tag: A comma-separated list of tags assigned to the movie by human annotators. Type: text / categorical.
+* avg1 ... avg107: 107 columns containing pre-computed visual features of the movie. These 
+  features were pre-extracted from the movie trailer, and capture asthetic aspects of the 
+  video. Each feature takes a continuous value. Type: float / continuous.
+* ivec1 ... ivec20: 20 columns containing pre-computed audio features of the movie. These
+  features were pre-extracted from the movie trailer, and capture a variety of sound features
+  of the specific movie. Type: float / continuous
+
+All genre labels are taken from the following set of 18 genres: Action, Adventure, Animation, Children, Comedy, Crime, Documentary, Drama, Fantasy, Film_Noir, Horror, Musical, Mystery, Romance, Sci_fi, Thriller, War, Western
+
+The main library used in this projects are: sklearn, matplotlib, pandas, numpy and nltk. 
+
+==========
+Workflow
+==========
+
+* 1st Cell: 
+Read in data from .tsv files.
+Drop irrelevant features from dataset.
+Drop rows with missing value.
+Vectorise the tag and title feature and extract audio and visual feature:
+	- tf_tag: tag feature in training set
+	- vf_tag: tag feature in validation set
+	- tf_title: title feature in training set
+	- vf_title: title feature in validation set
+	- tf_audio: audio feature in training set
+	- vf_audio: audio feature in validation set
+	- tf_visual: visual feature in training set
+	- vf_visual: visual feature in validation set	
+Extract genre names and store in labels_name.
+
+* 2nd Cell:
+Find the most common genre in training set by counting the number of each genre.
+Compute the accuracy of validation set by predicting all of the movies to the most common genre.
+
+* 3rd Cell:
+Define plot_confusion_matrix method to plot confusion matrix.
+
+* 4th Cell:
+Define trainModelWithFeatures method:
+	- Input:
+		- train_fea & test_fea: training and validation data with a combination of 		features.
+		- tl & vl: labels of training and validation set.
+The method prints accuracy, plots the heat map of confusion matrix for RF, LR and MLP classifier. 
+
+* 5th - 20th Cells:
+Display the performance of classifiers trained with hybrid combination of features.
+
+* 21st - 24th Cells:
+Plot the learning curve of classifiers.
+
+* 25th Cell:
+Predict the movie genre from test set using the classifier which has the best performance.
+Save it into a .csv file.
+	
+
+
+
+
+
+
+
+
+
+
+
+
